@@ -13,7 +13,7 @@
 
 var a; // declarando
 var b = 'b'; // declaramos y asignamos
-b = 'bb'; // reasignacion
+b = 'bb'; // reasignacion-m
 var a = 'aa'; //redeclaracion 
 
 // Global Scope 
