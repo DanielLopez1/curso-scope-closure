@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Scope Closure Hoisting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <ul>
+                <li><a href="#scope">Scope</a></li>
+                <li><a href="#closure">Closure</a></li>
+                <li><a href="#hoisting">Hoisting</a> </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="scope" >
+                <article class="desc-scope">
+                    <h1>Scope</h1>
+                    <h3>¿Que es el scope?</h3>
+                    <p>   Se puede definir como el alcance que tienen nuestras variables dentro del documento.
+                        Es importante tener en cuenta que los OBJETOS y las FUNCIONES tambien son variables, por lo tanto son afectadas por el SCOPE.
+                        Para entender a la perfeccion como afecta el SCOPE debemos tener en cuenta el ?funcionamiento de las variables? que se pueden ?DECLARAR - ASIGNAR - DECLARAR y ASIGNAR - REDECLARAR - REASIGNAR?
+                    </p>
+
+                    <p>Tenemos distintos TIPOS de Scope : Global - Function - Block.</p>   
+                        
+                       
+                    <h3>Ejemplos de Scope en Codigo</h3>
+
+                    <h4>Global</h4>
+                    <p>Global Scope - Se define cuando una variable esta declarada de forma global, osea ?Fuera de una funcion o un bloque?.
+                        No es buena practica declarar de forma global ya que podemos declarar dos variables con el mismo nombre y diferente valor.
+                        </p> 
+                    <code> // Global Scope 
+                            var fruit = 'Apple'; //Global
+
+                            function bestFruit(){
+                                console.log(fruit);
+                            }
+
+                            bestFruit();
+
+                            //Otra forma de crear una variable global es asignandola en una funcion
+
+                            function countries(){
+                                country = 'Mexico'; //Asignamos pero NO declaramos
+                                console.log(country)
+                            }
+
+                            countries();
+
+                            console.log(country)
+                    </code>
+                    <h4>Funtion Scope</h4>
+                    <p>Al declarar variables dentro de una funcion estas solo podran ser utilizadas dentro de la misma, si se trata de invocar desde afuera la consola marcara un error y aplica solo al usar let o const.
+                        </p>
+                    <code> //Funciones Scope
+                        function greeting(){
+                            let userName = 'Ana';
+                            console.log(userName);
+
+                            if (userName === 'Ana'){
+                                console.log(`Hello ${userName}!`)
+                            }
+                        }
+
+                        greeting();
+                    </code>
+                    <h4>Block scope</h4>
+                    <p> fruit1 al estar declarada con var tiene scope de función, por ende puede ser accedida desde cualquier parte de la función fruits, ergo, imprimirá Apple por consola.</p>
+                    <p> fruit2 y fruit3 están declaradas con let y const respectivamente, por ende tienen scope de bloque, en otras palabras solo pueden ser accedidas desde el cuerpo del if y no así desde toda la función fruits.</p>
+                        <code>function fruits(){
+                            if (true){
+                                var  fruit1 = 'Apple'; //funtion scope
+                                let fruit2 = 'kiwi';  //Block scope
+                                const fruit3 = 'Bannana' //Block scope
+                            }
+                        
+                            console.log(fruit1);
+                            console.log(fruit2);
+                            console.log(fruit3);
+                        }
+                        fruits();
+                    </code>
+                </article>
+        </section>
+        <section id="closure">
+            <article class="desc-closure">
+                <h1>Closure</h1>
+                <h3>¿Que es el closure?</h3>
+                <p>Un closure es la combinación entre una función y el ámbito léxico en el que esta fue declarada. Con esto, la función recuerda el ámbito con el cual se creó. Puedes entender los closures como: función interna + scope. Mira estos pasos:</p>
+                 <ul>
+                    <li>Genera una función que retorna una función interna.</li>
+                    <li>Esta función interna tiene un scope, el cual puede ser accedido únicamente por esta función, es decir, las variables, funciones, etc. definidas en el scope solo pueden ser accedidas por la función interna.</li>
+                    <li>Como resultado, esta función interna retornada con su scope será nuestro closure.</li>
+                 </ul>
+                 <code>  const  myGlobal = 0;
+
+function myfunction(){
+    const myNumber =1;
+    console.log(myGlobal);
+
+    function parent(){
+        const inner = 2;
+        console.log(myNumber, myGlobal); 
+
+        function child() {
+            console.log(inner, myNumber, myGlobal)
+        }
+        return child();
+    }
+
+    return parent();
+}
+
+myfunction();
+                 </code>
+            </article>
+        </section>
+        <section id="hoisting"></section>
+    </main>
+</body>
+</html>
